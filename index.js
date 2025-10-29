@@ -3,6 +3,7 @@ import dotenv from "dotenv";
 import cookieParser from "cookie-parser";
 import connectDB from "./config/db.js";
 import movieRouter from "./routes/movie.route.js";
+import { deleteMovie } from "./controllers/movie.controller.js";
 
 dotenv.config();
 const app = express();
@@ -20,6 +21,7 @@ app.get("/test", (req, res) => {
 
 //apis
 app.use("/api/movies", movieRouter);
+app.use("/api/movies/:id", deleteMovie);
 
 const PORT = process.env.PORT || 3000;
 
