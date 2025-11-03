@@ -1,4 +1,12 @@
 import Movie from "../models/movie.model.js";
+import movieService from "../services/movie.service.js";
+
+const responseBody = {
+    err: {},
+    data: {},
+    message: "Something went wrong,unable to fetch movie",
+    success: false
+}
 
 export const createMovie = async (req, res) => {
     try {
@@ -38,7 +46,11 @@ export const deleteMovie = async (req, res) => {
 }
 export const getMovie = async(req,res)=>{
     try {
-        const movie=await Movie.findById(req.params.id);
+        const response = await movieService.getMovieById(req.params.id);
+        if(response.err){
+            responseBody.err = response.err;
+            return res.status(response.code).json(responseBody);
+        }
         return res.status(200).json({
             success:true,
             message:"Movie fetched successfully",
