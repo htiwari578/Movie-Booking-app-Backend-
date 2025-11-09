@@ -54,7 +54,7 @@ export const getMovie = async(req,res)=>{
         return res.status(200).json({
             success:true,
             message:"Movie fetched successfully",
-            data:movie
+            data:response,
         });
     } catch (error) {
         console.error("Error fetching movie:", error);
@@ -64,3 +64,4 @@ export const getMovie = async(req,res)=>{
         });
     }
 }
+
