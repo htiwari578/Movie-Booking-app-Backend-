@@ -7,37 +7,28 @@ import { errorResponseBody, successResponseBody } from "../utils/responsebody.js
 export const createMovie = async (req, res) => {
     try {
       
-        const movie = await Movie.create(req.body);
+        const movie = await movieService.createMovie(req.body);
        
 
-        return res.status(201).json({
-            success: true,
-            message: "Movie created successfully",
-            data: movie
-        });
+        successResponseBody.data = movie;
+        successResponseBody.message = "Movie created successfully";
+        return res.status(201).json(successResponseBody);
     } catch (error) {
         console.error("Error creating movie:", error);
-        return res.status(500).json({
-            success: false,
-            message: "Internal Server Error"
-        });
+        return res.status(500).json(errorResponseBody);
     }
 }
 
 export const deleteMovie = async (req, res) => {
     try {
-        const response = await Movie.deleteOne({_id: req.params.id});
-        return res.status(200).json({
-            success: true,
-            message: "Movie deleted successfully",
-            data: response
-        });
+        const response = await movieService.deleteMovie(req.params.id);
+        successResponseBody.data = response;
+        successResponseBody.message = "Movie deleted successfully";
+        return res.status(200).json(successResponseBody);
+       
     } catch (error) {
         console.error("Error deleting movie:", error);
-        return res.status(500).json({
-            success: false,
-            message: "Internal Server Error"
-        });
+        return res.status(500).json(errorResponseBody);
     }
 }
 export const getMovie = async(req,res)=>{
