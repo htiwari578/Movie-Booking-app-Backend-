@@ -1,17 +1,8 @@
 import Movie from "../models/movie.model.js";
 import movieService from "../services/movie.service.js";
+import { errorResponseBody, successResponseBody } from "../utils/responsebody.js";
 
-const errorResponseBody = {
-    err: {},
-    data: {},
-    message: "Something went wrong,unable to fetch movie",
-    success: false
-}
-const successResponseBody = {
-    data: {},
-    message: "Movie fetched successfully",
-    success: true
-}
+
 
 export const createMovie = async (req, res) => {
     try {
