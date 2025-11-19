@@ -60,10 +60,9 @@ export const getMovie = async(req,res)=>{
         return res.status(200).json(successResponseBody);
     } catch (error) {
         console.error("Error fetching movie:", error);
-        return res.status(500).json({
-            success: false,
-            message: "Internal Server Error"
-        });
+        return res.status(500).json(
+            errorResponseBody
+        );
     }
 }
 
